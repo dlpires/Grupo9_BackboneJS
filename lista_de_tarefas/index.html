@@ -1,0 +1,110 @@
+<!--
+    INDEX.HTML
+-->
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+        <title>Minhas Tarefas</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+	</head>
+
+	<body>
+
+        <!--
+            ESTRUTURA BASICA DAS TELAS
+        -->
+
+        <div class="container">
+            <div id="menu" class="menu cf"></div><!-- ESTÁTICO (NÃO SERÁ MUDADO) -->
+            <h1></h1> <!--SERÁ ALTERADO PELOS TEMPLATES-->
+            <div id="content"></div> <!--SERÁ ALTERADO PELOS TEMPLATES-->
+        </div>
+
+        <!-- Templates -->
+
+        <!--
+            TEMPLATE DO MENU
+        -->
+        <script type="text/template" id="tpl-menu">
+            <ul>
+                <li><a href="#">Lista</a></li>
+                <li><a href="#archive">Arquivado</a></li>
+                <li class="right"><a href="#new">+ Nova Tarefa</a></li>
+            </ul>
+        </script>
+
+        <!--
+            TEMPLATE DE LISTAS (LISTA DE TAREFAS E ARQUIVADOS)
+
+            OBS.: EXPRESSÕES E ATRIBUTOS DE TAG SERÃO TRATADOS AO JS BUSCAR ESSE TEMPLATE
+        -->
+        
+
+        <!--<%=...%> = EXPRESSÃO ENVIADA AO TEMPLATE PARA SER INJETADO OS DADOS DO HTML (parametros do template) -->
+        <!--javascript:void(0) = permanece na mesma página (esta usando o #) atributos estarão tratando o que este link fará-->
+        <script type="text/template" id="tpl-list-item">
+            <li class="cf done-<%= done %>" data-index="<%= index %>">
+                <h2>
+                    <input type="checkbox" data-status <%= doneChecked %> />
+                    <a href="javascript:void(0);" data-up>&#8593;</a>
+                    <a href="javascript:void(0);" data-down>&#8595;</a>
+                    <%= title %>
+                </h2>
+                <div class="options">
+                    <a href="#edit/<%= index %>">Editar</a>
+                    <a href="javascript:void(0);" data-archive><%= archiveLink %></a>
+                    <a href="#delete/<%= index %>">Excluir</a>
+                </div>
+            </li>
+        </script>
+
+       <!--
+           TEMPLATE DOS FORMS (CRIAR NOVA TAREFA E EDITAR)
+       -->
+       <!-- Template espera o parametro title ao ser carregado, onde virão as informações da tarefa quando for editada ou vazia, ao criar uma nova  -->
+        <script type="text/template" id="tpl-form">
+            <form>
+                <textarea><%= title %></textarea> 
+                <button>Salvar</button>
+            </form>
+        </script>
+
+        <!-- /Templates -->
+
+        <!--
+            DEPENDÊNCIAS DO CÓDIGO
+        -->
+        <script src="js/vendor/jquery.min.js"></script>
+        <script src="js/vendor/underscore.js"></script> <!-- DEPENDÊNCIA OBRIGATÓRIO -->
+        <script src="js/vendor/backbone.min.js"></script>
+
+
+        <!--
+            ESTRUTURA JS QUE SERÁ UTILIZADA NO CÓDIGO
+        -->
+        <script src="js/App.js"></script>
+        <script src="js/views/menu.js"></script>
+        <script src="js/views/list.js"></script>
+        <script src="js/views/form.js"></script>
+        <script src="js/models/ToDo.js"></script>
+        <script src="js/collections/ToDos.js"></script>
+        
+        <!--
+            SCRIPT QUE INICIALIZA A APLICAÇÃO WEB
+        -->
+        <script>
+            window.onload = function() {
+                app.init(); 
+                /*
+                    VARIÁVEL QUE INICIALIZA TODO O PROJETO (PORTA DE ENTRADA)
+                */
+            }
+        </script>
+	</body>
+
+</html>
