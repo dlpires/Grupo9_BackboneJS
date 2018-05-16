@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Helloworld!</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>    
+</head>
+<body>
+        <script>
+                (function($){
+                
+                  var ListView = Backbone.View.extend({    
+                    el: $('body'), //el = aponta para o body
+                
+                    initialize: function(){//inicializando  o script
+                      _.bindAll(this, 'render');
+                       
+                       this.render();//chama o render
+                    },        
+                
+                    render: function(){
+                      $(this.el).append("<h1>HELLO WORLD!!</h1>"); //insere no body o texto
+                    }
+                  });
+                  var listView = new ListView();//CHAMA UM OBJETO DO TIPO LISTVIEW
+                  
+                })(jQuery);
+        </script>    
+</body>
+</html>
